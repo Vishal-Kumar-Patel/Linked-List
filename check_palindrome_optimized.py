@@ -121,12 +121,14 @@ def check_palindrome(start: base.Node) -> bool:
     # print("Right List: ", end="")
     # print_list(right)
 
+
     while right:
         if left.data != right.data:
             return False
         
         left = left.next
         right = right.next
+
 
     return True
 
@@ -138,7 +140,7 @@ def check_palindrome(start: base.Node) -> bool:
 
 if __name__ == "__main__":
     test_cases = 0
-    while test_cases <= 1000:
+    while test_cases <= 0:
         arr: list[int] = [base.random.randrange(0, 101) for _ in range(5, 15)]
 
         lst: base.SLL = base.SLL()
@@ -157,6 +159,7 @@ if __name__ == "__main__":
 
         print("Checking Palindrome")
         print(check_palindrome(lst.head))
+        print(lst)
         
         test_cases += 1
 

@@ -43,7 +43,7 @@ class SLL:
 
 
 
-# They have stopped using Optional[SLL]. They say type | type is best
+# They have stopped using Optional[SLL]. They say "type | None" is best
 def merge(lst1:Node | None, lst2:Node | None) -> Node | None:
     head1: Node | None = lst1.head
     head2: Node | None = lst2.head

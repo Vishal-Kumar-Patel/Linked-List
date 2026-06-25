@@ -3,18 +3,19 @@ from typing import Optional
 
 
 class Node:
-    def __init__(self, value: int):
-        self.data = value
-        self.next = None
+    def __init__(self, value: int) -> None:
+        self.data: int = value
+        self.next: Node | None = None
 
 
 class SLL:
-    def __init__(self):
-        self.head = None
-        self._size = 0
+    def __init__(self) -> None:
+        self.head: Node | None = None
+        self._size: int = 0
 
+    # for printing the list using SLL object
     def __str__(self) -> str:
-        curr = self.head
+        curr: Node | None = self.head
         values:list[int] = []
 
         while curr is not None:
@@ -23,11 +24,13 @@ class SLL:
 
         return "->".join(values)
     
-    def __len__(self):
+
+    
+    def __len__(self) -> int:
         return self._size
     
-    def append(self, value:int):
-        new_node = Node(value)
+    def append(self, value:int) -> None:
+        new_node: Node | None = Node(value)
 
         if self.head is not None:
             self.tail.next = new_node
@@ -40,12 +43,14 @@ class SLL:
 
 
 
-def merge(lst1:Optional[SLL], lst2:Optional[SLL]) -> Optional[SLL]:
-    head1 = lst1.head
-    head2 = lst2.head
+# They have stopped using Optional[SLL]. They say type | type is best
+def merge(lst1:Node | None, lst2:Node | None) -> Node | None:
+    head1: Node | None = lst1.head
+    head2: Node | None = lst2.head
 
-    dummy = Node(-1)
-    tail = dummy
+    dummy: SLL = SLL()
+    dummy.append(-1)
+    tail = dummy.head
 
     while head1 and head2:
         if head1.data <= head2.data:
@@ -71,10 +76,10 @@ def merge(lst1:Optional[SLL], lst2:Optional[SLL]) -> Optional[SLL]:
         tail = tail.next
         head2 = head2.next
 
-    merged = SLL()
-    merged.head = dummy.next
+    
 
-    return merged
+    dummy.head = dummy.head.next
+    return dummy
 
 
 def get_size(lst:Optional[SLL]) -> Optional[SLL]:
@@ -92,24 +97,30 @@ def get_size(lst:Optional[SLL]) -> Optional[SLL]:
 
 
 if __name__ == "__main__":
-    arr1 = [random.randrange(0, 101) for _ in range(random.randrange(5, 21))]
-    arr2 = [random.randrange(0, 101) for _ in range(random.randrange(5, 21))]
+    test_cases = 0
+    while test_cases <= 1000:
+        arr1 = [random.randrange(0, 101) for _ in range(random.randrange(5, 21))]
+        arr2 = [random.randrange(0, 101) for _ in range(random.randrange(5, 21))]
 
-    lst1 = SLL()
-    lst2 = SLL()
+        lst1 = SLL()
+        lst2 = SLL()
 
-    for num in arr1:
-        lst1.append(num)
+        for num in arr1:
+            lst1.append(num)
 
-    for num in arr2:
-        lst2.append(num)
+        for num in arr2:
+            lst2.append(num)
 
-    print("List1: ", lst1)
-    print("List2: ", lst2)
+        print("List1: ", lst1)
+        print("List2: ", lst2)
 
-    lst = merge(lst1, lst2)
-    print("Merged List: ", lst)
+        lst = merge(lst1, lst2)
+        print("Merged List: ", lst)
 
-    print("Size of list1: ", len(lst1))
-    print("Size of list2: ", len(lst2))
-    print("Size of merged list: ", get_size(lst))
+        print("Size of list1: ", len(lst1))
+        print("Size of list2: ", len(lst2))
+        print("Size of merged list: ", get_size(lst))
+
+        test_cases += 1
+    
+    print(test_cases)
